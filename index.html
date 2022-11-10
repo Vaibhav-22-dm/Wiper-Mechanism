@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1440">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- <link rel="shortcut icon" type="image/jpg" href="Images/icon.png"/> -->
+        <title>Wiper Mechanism</title>
+
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/GH_ribbon.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/btn.css">
+    </head>
+    <body>
+        <h1 class="display-6 text-center bg-gradient py-3">Wiper Mechanism Simulation</h1>
+        <div class="container mx-5 pb-5">
+            <div class="row">
+                <div class="col-xl-7 col-md-12">
+                    <canvas id="wiper" width="400" height="600"></canvas>
+                </div>
+                <div class="col-xl-5 col-md-12">
+                    <div class="row">
+                        <div class="text-center">
+                            <button id="animation" class="custom-btn-blue my-2 w-50 mx-2" onclick="animPD.toggleAnim(); update_butt();">Start animation</button>
+                            <button class="custom-btn-yellow w-25 my-2 mx-2" onclick="reset();">Reset</button>
+                            <div id="msg"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12" style="padding:0px;">
+                            <div class="param-card">
+                                <div class="sub-head">Actuator (Motor)</div>
+                                <div class="param-box">
+                                    <div class="param-title">Angular Speed (ω)</div>
+                                    <div id="w_val" class="param-val border rounded bg-light">2 rad/s</div>
+                                    <input type="range" id="omegaslider" class="param-range" min="-9" max="9" value="2" step="0.01" oninput="setOmega();">
+                                </div>
+                            </div> 
+                            <div class="param-card">
+                                <div class="sub-head">4-Bar Mechanism</div>
+                                <div class="param-box">
+                                    <div class="param-title">Motor Bar Length</div>
+                                    <div id="motor_bar_val" class="param-val border rounded bg-light">0.6 m</div>
+                                    <input type="range" id="motor_bar" class="param-range"  min="0.1" max="3" value="0.6" step="0.1" oninput="setmotor();">
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">Coupler Bar Length</div>
+                                    <div id="coupler_bar_val" class="param-val border rounded bg-light">2.8 m</div>
+                                    <input type="range" id="coupler_bar" class="param-range" min="0.1" max="3" value="2.8" step="0.1" oninput="setcoupler();">
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">Output Bar Length</div>
+                                    <div id="output_bar_val" class="param-val border rounded bg-light">1.6 m</div>
+                                    <input type="range"  id="output_bar" class="param-range" min="0.1" max="3" value="1.6" step="0.1" oninput="setoutput();">
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">Base Bar Length<button data-bs-toggle="tooltip" data-bs-placement="top" title="This length is fixed.">
+                                        <i>i</i></button></div>
+                                    <div id="base_bar_val" class="param-val border rounded bg-light">1.6 m</div>
+                                    <input type="range" id="base_bar" class="param-range" min="0.1" max="4" value="" step="0.1" disabled>
+                                </div>
+                            </div>
+                            <div class="param-card">
+                                <div class="param-box">
+                                    <div class="param-title">
+                                        Delta Angle (δ)
+                                        <div class="d-inline-block form-check form-switch" style="margin: 0 5px;vertical-align: middle;" >
+                                            <input class="form-check-input" type="checkbox" checked onclick="animPD.toggleOption('delta_label')">
+                                        </div>
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Controls the positioning of the Area wiped.">
+                                            <i>i</i>
+                                        </button>
+                                    </div>
+                                    <div id="delta_val" class="param-val border rounded bg-light">10º</div>
+                                    <input type="range" id="delta" class="param-range" min="-30" max="30" value="10" step="1" oninput="setdelta();">
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">Wiper Bar Length</div>
+                                    <div id="wiper_bar_val" class="param-val border rounded bg-light">4 m</div>
+                                    <input type="range" id="wiper_bar" class="param-range" min="2" max="4.4" value="4" step="0.1" oninput="setwiper();">
+                                </div>
+                            </div>    
+                            <div class="param-card">
+                                <div class="param-box">
+                                    <div class="param-title">
+                                        Speed 
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Green vectors represents velocity.">
+                                            <i>i</i>
+                                        </button>
+                                    </div>
+                                    <div id="speed_val" class="param-val border rounded bg-light">0 m/s</div>
+                                    <div class="param-range d-inline-block form-check form-switch" style="vertical-align: middle; padding: 0px; position:relative;">
+                                        
+                                    </div>
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">
+                                        |Net Acceleration|
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Dark pink vector represents the net acceleration and light pink vectors represents centripetal acceleration (ac) and tangential acceleration (at).">
+                                            <i>i</i>
+                                        </button>
+                                    </div>
+                                    <div id="acc_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div class="param-range d-inline-block form-check form-switch" style="vertical-align: middle; padding: 0px; position:relative;">
+                                        
+                                    </div>
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">
+                                        |a<sub>c</sub>| (Centripetal)
+                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Can be verified by calculating (speed)^2/(wiper bar length) from above.">
+                                            <i>i</i>
+                                        </button> 
+                                    </div>
+                                    <div id="cent_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div class="param-range"></div>
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">
+                                        |a<sub>t</sub>| (Tangential)
+                                    </div>
+                                    <div id="tan_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div class="param-range"></div>
+                                </div>
+                                <div class="param-box">
+                                    <div class="param-title">Area Wiped</div>
+                                    <div id="area_val" class="param-val border rounded bg-light">0 m<sup>2</sup></div>
+                                    <div class="param-range"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <script src="js/sylvester.js"></script>
+        <script src="js/PrairieDraw.js"></script>
+        <script src="js/script.js"></script>
+        <script src="./js/slider.js"></script>
+    </body>
+</html>
