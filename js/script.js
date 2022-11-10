@@ -574,12 +574,12 @@ function setoutput(value){
     if(!animPD._running){
         animPD.startAnim();
         Link_O4B = document.getElementById('output_bar').value;
-        document.getElementById("output_bar_val").value = `${Link_O4B} m`;
+        document.getElementById("output_bar_val").value = Link_O4B;
         animPD.stopAnim();
     }
     else{
         Link_O4B = document.getElementById('output_bar').value;
-        document.getElementById("output_bar_val").value = `${Link_O4B} m`;
+        document.getElementById("output_bar_val").value = Link_O4B;
     }
 }
 
