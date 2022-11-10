@@ -31,7 +31,7 @@ var length_wiper_bar = 2;
 var length_base = Math.sqrt(pivot_motor.e(1)*pivot_motor.e(1) + pivot_motor.e(2)*pivot_motor.e(2));
 
 document.getElementById('base_bar').value = length_base;
-document.getElementById("base_bar_val").innerHTML = `${length_base.toFixed(2)} m`;
+document.getElementById("base_bar_val").innerHTML = length_base.toFixed(2);
 
 animPD = new PrairieDrawAnim("wiper", function(t) {
 
@@ -117,9 +117,11 @@ animPD = new PrairieDrawAnim("wiper", function(t) {
 
     // DRAW GROUND
     var G1 = $V([0, -0.3]);
-    var G2 = $V([pivot_motor.e(1), pivot_motor.e(2)-0.3]);
-    this.ground(G1, $V([0, 1]), 15);
+    var G2 = $V([-1, -0.3])
+    var G3 = $V([pivot_motor.e(1), pivot_motor.e(2)-0.3]);
+    this.ground(G1, $V([0, 1]), 0.8);
     this.ground(G2, $V([0, 1]), 0.8);
+    this.ground(G3, $V([0, 1]), 0.8);
 
     //Text for motor
     this._ctx.font = "15px Arial";
@@ -376,22 +378,22 @@ function reset ()
     Link_O4C = 4;
 
     document.getElementById('omegaslider').value = omega;
-    document.getElementById("w_val").innerHTML = `${omega} rad/s`;
+    document.getElementById("w_val").value = `${omega} rad/s`;
 
     document.getElementById('delta').value = delta_angle*(180/Math.PI);
-    document.getElementById("delta_val").innerHTML = `${Math.round(delta_angle*(180/Math.PI))}º`;
+    document.getElementById("delta_val").value = `${Math.round(delta_angle*(180/Math.PI))}º`;
 
     document.getElementById('motor_bar').value = Link_O2A;
-    document.getElementById("motor_bar_val").innerHTML = `${Link_O2A} m`;
+    document.getElementById("motor_bar_val").value = `${Link_O2A} m`;
 
     document.getElementById('coupler_bar').value = Link_AB;
-    document.getElementById("coupler_bar_val").innerHTML = `${Link_AB} m`;
+    document.getElementById("coupler_bar_val").value = `${Link_AB} m`;
 
     document.getElementById('output_bar').value = Link_O4B;
-    document.getElementById("output_bar_val").innerHTML = `${Link_O4B} m`;
+    document.getElementById("output_bar_val").value = `${Link_O4B} m`;
 
     document.getElementById('wiper_bar').value = Link_O4C;
-    document.getElementById("wiper_bar_val").innerHTML = `${Link_O4C} m`;
+    document.getElementById("wiper_bar_val").value = `${Link_O4C} m`;
 }
 
 function setOmega(value){
@@ -405,12 +407,32 @@ function setOmega(value){
         animPD.startAnim();
         omega = document.getElementById('omegaslider').value;
         console.log(document.getElementById('omegaslider').value)
-        document.getElementById("w_val").innerHTML = `${omega} rad/s`;
+        document.getElementById("w_val").value = omega;
         animPD.stopAnim();
     }
     else{
         omega = document.getElementById('omegaslider').value;
-        document.getElementById("w_val").innerHTML = `${omega} rad/s`;
+        document.getElementById("w_val").value = omega;
+    }
+}
+
+function setOmega1(value){
+    temp_time = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        omega = document.getElementById('w_val').value;
+        // console.log(document.getElementById('omegaslider').value)
+        document.getElementById("omegaslider").value = omega;
+        animPD.stopAnim();
+    }
+    else{
+        omega = document.getElementById('w_val').value;
+        document.getElementById("omegaslider").value = omega;
     }
 }
 
@@ -426,14 +448,36 @@ function setdelta(value){
     if(!animPD._running){
         animPD.startAnim();
         delta_angle = document.getElementById('delta').value*(Math.PI/180);
-        document.getElementById("delta_val").innerHTML = `${Math.round(delta_angle*(180/Math.PI))}º`;
+        document.getElementById("delta_val").value = Math.round(delta_angle*(180/Math.PI));
         animPD.stopAnim();
     }
     else{
         delta_angle = document.getElementById('delta').value*(Math.PI/180);
-        document.getElementById("delta_val").innerHTML = `${Math.round(delta_angle*(180/Math.PI))}º`;
+        document.getElementById("delta_val").value = Math.round(delta_angle*(180/Math.PI));
     }
 }
+
+function setdelta1(value){
+    temp_time = 0;
+    maxO4 = 0;
+    minO4 = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        delta_angle = document.getElementById('delta_val').value*(Math.PI/180);
+        document.getElementById("delta").value = Math.round(delta_angle*(180/Math.PI));
+        animPD.stopAnim();
+    }
+    else{
+        delta_angle = document.getElementById('delta_val').value*(Math.PI/180);
+        document.getElementById("delta").value = Math.round(delta_angle*(180/Math.PI));
+    }
+}
+
 
 function setmotor(value){
     temp_time = 0;
@@ -447,14 +491,36 @@ function setmotor(value){
     if(!animPD._running){
         animPD.startAnim();
         Link_O2A = document.getElementById('motor_bar').value;
-        document.getElementById("motor_bar_val").innerHTML = `${Link_O2A} m`;
+        document.getElementById("motor_bar_val").value = Link_O2A;
         animPD.stopAnim();
     }
     else{
         Link_O2A = document.getElementById('motor_bar').value;
-        document.getElementById("motor_bar_val").innerHTML = `${Link_O2A} m`;
+        document.getElementById("motor_bar_val").value = Link_O2A;
     }
 }
+
+function setmotor1(value){
+    temp_time = 0;
+    maxO4 = 0;
+    minO4 = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        Link_O2A = document.getElementById('motor_bar_val').value;
+        document.getElementById("motor_bar").value = Link_O2A;
+        animPD.stopAnim();
+    }
+    else{
+        Link_O2A = document.getElementById('motor_bar_val').value;
+        document.getElementById("motor_bar").value = Link_O2A;
+    }
+}
+
 function setcoupler(value){
     temp_time = 0;
     maxO4 = 0;
@@ -467,12 +533,33 @@ function setcoupler(value){
     if(!animPD._running){
         animPD.startAnim();
         Link_AB = document.getElementById('coupler_bar').value;
-        document.getElementById("coupler_bar_val").innerHTML = `${Link_AB} m`;
+        document.getElementById("coupler_bar_val").value = Link_AB;
         animPD.stopAnim();
     }
     else{
         Link_AB = document.getElementById('coupler_bar').value;
-        document.getElementById("coupler_bar_val").innerHTML = `${Link_AB} m`;
+        document.getElementById("coupler_bar_val").value = Link_AB;
+    }
+}
+
+function setcoupler1(value){
+    temp_time = 0;
+    maxO4 = 0;
+    minO4 = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        Link_AB = document.getElementById('coupler_bar_val').value;
+        document.getElementById("coupler_bar").value = Link_AB;
+        animPD.stopAnim();
+    }
+    else{
+        Link_AB = document.getElementById('coupler_bar_val').value;
+        document.getElementById("coupler_bar").value = Link_AB;
     }
 }
 function setoutput(value){
@@ -487,12 +574,33 @@ function setoutput(value){
     if(!animPD._running){
         animPD.startAnim();
         Link_O4B = document.getElementById('output_bar').value;
-        document.getElementById("output_bar_val").innerHTML = `${Link_O4B} m`;
+        document.getElementById("output_bar_val").value = `${Link_O4B} m`;
         animPD.stopAnim();
     }
     else{
         Link_O4B = document.getElementById('output_bar').value;
-        document.getElementById("output_bar_val").innerHTML = `${Link_O4B} m`;
+        document.getElementById("output_bar_val").value = `${Link_O4B} m`;
+    }
+}
+
+function setoutput1(value){
+    temp_time = 0;
+    maxO4 = 0;
+    minO4 = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        Link_O4B = document.getElementById('output_bar_val').value;
+        document.getElementById("output_bar").value = Link_O4B;
+        animPD.stopAnim();
+    }
+    else{
+        Link_O4B = document.getElementById('output_bar_val').value;
+        document.getElementById("output_bar").value = Link_O4B;
     }
 }
 
@@ -508,11 +616,33 @@ function setwiper(){
     if(!animPD._running){
         animPD.startAnim();
         Link_O4C = document.getElementById('wiper_bar').value;
-        document.getElementById("wiper_bar_val").innerHTML = `${Link_O4C} m`;
+        document.getElementById("wiper_bar_val").value = Link_O4C;
         animPD.stopAnim();
     }
     else{
         Link_O4C = document.getElementById('wiper_bar').value;
-        document.getElementById("wiper_bar_val").innerHTML = `${Link_O4C} m`;
+        document.getElementById("wiper_bar_val").value = Link_O4C;
+    }
+}
+
+
+function setwiper1(){
+    temp_time = 0;
+    maxO4 = 0;
+    minO4 = 0;
+    speedMax = 0;
+    accMax =0;
+
+    path_points_above = [];
+    path_points_below = [];
+    if(!animPD._running){
+        animPD.startAnim();
+        Link_O4C = document.getElementById('wiper_bar_val').value;
+        document.getElementById("wiper_bar").value = Link_O4C;
+        animPD.stopAnim();
+    }
+    else{
+        Link_O4C = document.getElementById('wiper_bar_val').value;
+        document.getElementById("wiper_bar").value = Link_O4C;
     }
 }

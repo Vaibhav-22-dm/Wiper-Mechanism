@@ -33,100 +33,89 @@
                             <div class="param-card">
                                 <div class="sub-head">Actuator (Motor)</div>
                                 <div class="param-box">
-                                    <div class="param-title">Angular Speed (ω)</div>
-                                    <div id="w_val" class="param-val border rounded bg-light">2 rad/s</div>
+                                    <div class="param-title">Angular Speed (ω) [rad/s]</div>
+                                    <input type="number" id="w_val" class="param-val border rounded bg-light"  min="-9" max="9" value="2"  oninput="setOmega1();">
                                     <input type="range" id="omegaslider" class="param-range" min="-9" max="9" value="2" step="0.01" oninput="setOmega();">
                                 </div>
                             </div> 
                             <div class="param-card">
                                 <div class="sub-head">4-Bar Mechanism</div>
                                 <div class="param-box">
-                                    <div class="param-title">Motor Bar Length</div>
-                                    <div id="motor_bar_val" class="param-val border rounded bg-light">0.6 m</div>
+                                    <div class="param-title">Link O<sub>2</sub>A Length [m]</div>
+                                    <input type="number" id="motor_bar_val" class="param-val border rounded bg-light" min="0.1" max="3" value="0.6" oninput="setmotor1();">
                                     <input type="range" id="motor_bar" class="param-range"  min="0.1" max="3" value="0.6" step="0.1" oninput="setmotor();">
                                 </div>
                                 <div class="param-box">
-                                    <div class="param-title">Coupler Bar Length</div>
-                                    <div id="coupler_bar_val" class="param-val border rounded bg-light">2.8 m</div>
+                                    <div class="param-title">Link AB Length [m]</div>
+                                    <input type="number" id="coupler_bar_val" class="param-val border rounded bg-light" value="2.8"  min="0.1" max="3" oninput="setcoupler1();">
                                     <input type="range" id="coupler_bar" class="param-range" min="0.1" max="3" value="2.8" step="0.1" oninput="setcoupler();">
                                 </div>
                                 <div class="param-box">
-                                    <div class="param-title">Output Bar Length</div>
-                                    <div id="output_bar_val" class="param-val border rounded bg-light">1.6 m</div>
+                                    <div class="param-title">Link BO<sub>4</sub> Length [m]</div>
+                                    <input type="number" id="output_bar_val" class="param-val border rounded bg-light" value="1.6" oninput="setoutput1();">
                                     <input type="range"  id="output_bar" class="param-range" min="0.1" max="3" value="1.6" step="0.1" oninput="setoutput();">
                                 </div>
                                 <div class="param-box">
-                                    <div class="param-title">Base Bar Length<button data-bs-toggle="tooltip" data-bs-placement="top" title="This length is fixed.">
+                                    <div class="param-title">Link O<sub>6</sub>O<sub>4</sub> Length [m]<button data-bs-toggle="tooltip" data-bs-placement="top" title="This length is fixed.">
                                         <i>i</i></button></div>
-                                    <div id="base_bar_val" class="param-val border rounded bg-light">1.6 m</div>
+                                    <div id="base_bar_val" class="param-val border rounded bg-light">1.6</div>
                                     <input type="range" id="base_bar" class="param-range" min="0.1" max="4" value="" step="0.1" disabled>
                                 </div>
                             </div>
                             <div class="param-card">
                                 <div class="param-box">
                                     <div class="param-title">
-                                        Delta Angle (δ)
-                                        <div class="d-inline-block form-check form-switch" style="margin: 0 5px;vertical-align: middle;" >
+                                        Delta Angle (δ) [degrees]
+                                        <!-- <div class="d-inline-block form-check form-switch" style="margin: 0 5px;vertical-align: middle;" >
                                             <input class="form-check-input" type="checkbox" checked onclick="animPD.toggleOption('delta_label')">
-                                        </div>
+                                        </div> -->
                                         <button data-bs-toggle="tooltip" data-bs-placement="top" title="Controls the positioning of the Area wiped.">
                                             <i>i</i>
                                         </button>
                                     </div>
-                                    <div id="delta_val" class="param-val border rounded bg-light">10º</div>
+                                    <input type="number" id="delta_val" class="param-val border rounded bg-light" min="-30" max="30"  value="10" oninput="setdelta1();">
                                     <input type="range" id="delta" class="param-range" min="-30" max="30" value="10" step="1" oninput="setdelta();">
                                 </div>
                                 <div class="param-box">
-                                    <div class="param-title">Wiper Bar Length</div>
-                                    <div id="wiper_bar_val" class="param-val border rounded bg-light">4 m</div>
-                                    <input type="range" id="wiper_bar" class="param-range" min="2" max="4.4" value="4" step="0.1" oninput="setwiper();">
+                                    <div class="param-title">Wiper Bar Length [m]</div>
+                                    <input type="number" id="wiper_bar_val" class="param-val border rounded bg-light"  min="2" max="4.4" value="4" oninput="setWiper1();">
+                                    <input type="range" id="wiper_bar" class="param-range" min="2" max="4.4" value=4 step="0.1" oninput="setwiper();">
                                 </div>
                             </div>    
                             <div class="param-card">
                                 <div class="param-box">
-                                    <div class="param-title">
-                                        Speed 
-                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Green vectors represents velocity.">
-                                            <i>i</i>
-                                        </button>
-                                    </div>
-                                    <div id="speed_val" class="param-val border rounded bg-light">0 m/s</div>
+                                    <div class="param-title">Speed [m/s]</div>
+                                    <div id="speed_val" class="param-val border rounded bg-light">0</div>
                                     <div class="param-range d-inline-block form-check form-switch" style="vertical-align: middle; padding: 0px; position:relative;">
                                         
                                     </div>
                                 </div>
                                 <div class="param-box">
                                     <div class="param-title">
-                                        |Net Acceleration|
-                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Dark pink vector represents the net acceleration and light pink vectors represents centripetal acceleration (ac) and tangential acceleration (at).">
-                                            <i>i</i>
-                                        </button>
+                                        |Net Acceleration| [m/s<sup>2</sup>]
                                     </div>
-                                    <div id="acc_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div id="acc_val" class="param-val border rounded bg-light">0</div>
                                     <div class="param-range d-inline-block form-check form-switch" style="vertical-align: middle; padding: 0px; position:relative;">
                                         
                                     </div>
                                 </div>
                                 <div class="param-box">
                                     <div class="param-title">
-                                        |a<sub>c</sub>| (Centripetal)
-                                        <button data-bs-toggle="tooltip" data-bs-placement="top" title="Can be verified by calculating (speed)^2/(wiper bar length) from above.">
-                                            <i>i</i>
-                                        </button> 
+                                        |a<sub>c</sub>| (Centripetal) [m/s<sup>2</sup>]
                                     </div>
-                                    <div id="cent_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div id="cent_val" class="param-val border rounded bg-light">0</div>
                                     <div class="param-range"></div>
                                 </div>
                                 <div class="param-box">
                                     <div class="param-title">
-                                        |a<sub>t</sub>| (Tangential)
+                                        |a<sub>t</sub>| (Tangential) [m/s<sup>2</sup>]
                                     </div>
-                                    <div id="tan_val" class="param-val border rounded bg-light">0 m/s<sup>2</sup></div>
+                                    <div id="tan_val" class="param-val border rounded bg-light">0</div>
                                     <div class="param-range"></div>
                                 </div>
                                 <div class="param-box">
-                                    <div class="param-title">Area Wiped</div>
-                                    <div id="area_val" class="param-val border rounded bg-light">0 m<sup>2</sup></div>
+                                    <div class="param-title">Area Wiped [m<sup>2</sup>]</div>
+                                    <div id="area_val" class="param-val border rounded bg-light">0</div>
                                     <div class="param-range"></div>
                                 </div>
                             </div>
