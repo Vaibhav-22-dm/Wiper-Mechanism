@@ -378,22 +378,22 @@ function reset ()
     Link_O4C = 4;
 
     document.getElementById('omegaslider').value = omega;
-    document.getElementById("w_val").value = `${omega} rad/s`;
+    document.getElementById("w_val").value = omega;
 
     document.getElementById('delta').value = delta_angle*(180/Math.PI);
-    document.getElementById("delta_val").value = `${Math.round(delta_angle*(180/Math.PI))}º`;
+    document.getElementById("delta_val").value = Math.round(delta_angle*(180/Math.PI));
 
     document.getElementById('motor_bar').value = Link_O2A;
-    document.getElementById("motor_bar_val").value = `${Link_O2A} m`;
+    document.getElementById("motor_bar_val").value = Link_O2A;
 
     document.getElementById('coupler_bar').value = Link_AB;
-    document.getElementById("coupler_bar_val").value = `${Link_AB} m`;
+    document.getElementById("coupler_bar_val").value = Link_AB;
 
     document.getElementById('output_bar').value = Link_O4B;
-    document.getElementById("output_bar_val").value = `${Link_O4B} m`;
+    document.getElementById("output_bar_val").value = Link_O4B;
 
     document.getElementById('wiper_bar').value = Link_O4C;
-    document.getElementById("wiper_bar_val").value = `${Link_O4C} m`;
+    document.getElementById("wiper_bar_val").value = Link_O4C;
 }
 
 function setOmega(value){
