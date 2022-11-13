@@ -208,23 +208,6 @@ animPD = new PrairieDrawAnim("wiper", function(t) {
     this.point($V([O6D,0]));
     this.restore();
 
-    //delta angle labelling
-    // if(this.getOption("delta_label"))
-    // {
-    //     this.save();
-    //     this.rotate(ref_angle-O4);
-    //     this.setProp("arrowLineWidthPx", 1);
-    //     this.setProp("shapeOutlineColor", "blue");
-    //     this.setProp("shapeStrokePattern", "dashed");
-    //     this.line($V([-BO4+1,0]), $V([1.5,0]));
-    //     this.rotate(delta_angle);
-    //     this.line($V([0,0]), $V([1.5,0]));
-    //     this.rotate(-delta_angle);
-    //     this.circleArrow($V([0,0]), 1.4, 0, delta_angle);
-    //     this._ctx.font = "15px Arial";
-    //     this.labelCircleLine($V([0,0]), 1.4, 0, delta_angle, $V([1, 3]), `δ = ${Math.round(delta_angle*(180/Math.PI))}º`, true);
-    //     this.restore();
-    // }
 
     //VELOCITY AND ACCELERATION
     
@@ -254,48 +237,6 @@ animPD = new PrairieDrawAnim("wiper", function(t) {
 
     document.getElementById('speed_val').innerHTML = `${dataWiper.diff.C.modulus().toFixed(2)} m/s`;
     document.getElementById('acc_val').innerHTML = `${dataWiper.ddiff.C.modulus().toFixed(1)} m/s<sup>2</sup>`;            
-
-    //scaling factor to scale down vel and acc magnitude as arrows get too big!!
-    // var scaling_factor = 3; 
-
-    // //velocity vector for motor
-    // this.save();
-    //     this.translate(pivot_motor);
-    //     this.arrow(dataMotor.A, dataMotor.A.add(dataMotor.diff.A.x(1/scaling_factor)), "velocity");
-    // this.restore();
-
-    // if (this.getOption("velocity")) {
-        
-    //     //velocity vector for wiper
-    //     this.save();
-    //         this.translate(pivot_right);
-    //         this.arrow(dataWiper.C, dataWiper.C.add(dataWiper.diff.C.x(1/scaling_factor)), "velocity");
-    //     this.restore();                
-    // }
-
-    // if (this.getOption("acceleration")) {
-    //     // //acceleration vector for motor
-    //     // this.save();
-    //     //     this.translate(pivot_motor);
-    //     //     this.arrow(dataMotor.A, dataMotor.A.add(dataMotor.ddiff.A.x(1/scaling_factor)), "acceleration");
-    //     // this.restore();
-
-    //     //acceleration vector for wiper
-    //     this.save();
-    //         this.translate(pivot_right);
-    //         //net acc
-    //         this.arrow(dataWiper.C, dataWiper.C.add(dataWiper.ddiff.C.x(1/scaling_factor)), "rotation");
-
-    //         var unit_vec_O4C = dataWiper.C.x(1/O4C);
-    //         this.save();
-    //         this.setProp("arrowLineWidthPx", 1.5);
-    //         //centripetal acc
-    //         this.arrow(dataWiper.C, dataWiper.C.x((O4C + dataWiper.ddiff.C.x(1/scaling_factor).dot(unit_vec_O4C))/O4C), "acceleration");
-    //         //tangential acc
-    //         this.arrow(dataWiper.C, dataWiper.C.add(dataWiper.ddiff.C.x(1/scaling_factor).subtract(unit_vec_O4C.x(dataWiper.ddiff.C.x(1/scaling_factor).dot(unit_vec_O4C)))), "acceleration");
-    //         this.restore();
-    //     this.restore();
-    // }
 
     document.getElementById('cent_val').innerHTML = `${Math.abs(dataWiper.ddiff.C.dot(dataWiper.C.x(1/O4C)).toFixed(1))} m/s<sup>2</sup>`;
     document.getElementById('tan_val').innerHTML = `${dataWiper.ddiff.C.subtract(dataWiper.C.x(1/O4C).x(dataWiper.ddiff.C.dot(dataWiper.C.x(1/O4C)))).modulus().toFixed(1)} m/s<sup>2</sup>`;
@@ -426,7 +367,6 @@ function setOmega1(value){
     if(!animPD._running){
         animPD.startAnim();
         omega = document.getElementById('w_val').value;
-        // console.log(document.getElementById('omegaslider').value)
         document.getElementById("omegaslider").value = omega;
         animPD.stopAnim();
     }
