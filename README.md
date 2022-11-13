@@ -1,5 +1,5 @@
 # Mechanism Sessional Assignment - Wiper Mechanism (Simulation) 
-<img src="https://github.com/vaibhav-22-dm/Wiper-Mechanism/blob/main/Images/title.gif" align="right" style="display:inline;" width="380" >
+<img src="https://github.com/vaibhav-22-dm/Wiper-Mechanism/blob/main/Images/Animated_GIF_11_13_2022_17_25_36.gif" align="right" style="display:inline;" width="380" >
 
 Simulator for a **4-bar wiper mechanism** with motion analysis and UI for user to change parameters.<br>
 [https://vaibhav-22-dm.github.io/Wiper-Mechanism/](https://vaibhav-22-dm.github.io/Wiper-Mechanism/)
