@@ -5,7 +5,8 @@ Simulator for a **4-bar wiper mechanism** with motion analysis and UI for user t
 [https://vaibhav-22-dm.github.io/Wiper-Mechanism/](https://vaibhav-22-dm.github.io/Wiper-Mechanism/)
 
 ## Technologies Used: 
-A simple JavaScript library called [``PrairieDraw.js``](https://prairielearn.readthedocs.io/en/latest/PrairieDraw/) is used for drawing technical diagrams and animations on an HTML5 canvas. <br>
+- The animation of mechanism shown in the gif is made using a web application called as [motiongen.io]. It is a simple drag and drop user interface to build interactive mechanism.
+- The web application for simulation is made using a simple JavaScript library called [``PrairieDraw.js``](https://prairielearn.readthedocs.io/en/latest/PrairieDraw/) is used for drawing technical diagrams and animations on an HTML5 canvas. <br>
 ``PrairieDraw.js`` uses the Sylvester.Vector class of [``Sylvester.js``](http://sylvester.jcoglan.com/docs.html) library to specify positions and directions for the drawing.
 <br>
 
@@ -22,7 +23,7 @@ Read the [userManual.html](https://vaibhav-22-dm.github.io/Wiper-Mechanism/User%
 1. Smooth real-time simulation using JavaScript.
 2. Real-time parameter adjustments possible.
 3. Graphs for speed vs time and mod acceleration vs time.
-4. Toogle buttons for velocity and acceleration vectors.
+4. Toggle buttons for velocity and acceleration vectors.
 5. Data for area wiped, velocity, acceleration and its components. 
 
 ## Team Members:
