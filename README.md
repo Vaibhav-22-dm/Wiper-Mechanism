@@ -6,14 +6,7 @@ Simulator for a **4-bar wiper mechanism** with motion analysis and UI for user t
 
 ## Technologies Used: 
 - The animation of mechanism shown in the gif is made using a web application called as [motiongen.io]. It is a simple drag and drop user interface to build interactive mechanism.
-- The web application for simulation is made using a simple JavaScript library called [``PrairieDraw.js``](https://prairielearn.readthedocs.io/en/latest/PrairieDraw/) is used for drawing technical diagrams and animations on an HTML5 canvas. <br>
-``PrairieDraw.js`` uses the Sylvester.Vector class of [``Sylvester.js``](http://sylvester.jcoglan.com/docs.html) library to specify positions and directions for the drawing.
-<br>
-
-- PrairieDraw Repo :- [martin70/PrairieDraw.js](https://github.com/martin70/PrairieDraw.js)
-
-Read the [userManual.html](https://vaibhav-22-dm.github.io/Wiper-Mechanism/User%20Manual/userManual.html) in the User Manual folder, or use the JsDoc toolkit to generate the documentation with the included Makefile.
-
+- The web application for simulation is made using a simple JavaScript library called [``PrairieDraw.js``](https://prairielearn.readthedocs.io/en/latest/PrairieDraw/) is used for drawing technical diagrams and animations on an HTML5 canvas.``PrairieDraw.js`` uses the Sylvester.Vector class of [``Sylvester.js``](http://sylvester.jcoglan.com/docs.html) library to specify positions and directions for the drawing. PrairieDraw Repo :- [martin70/PrairieDraw.js](https://github.com/martin70/PrairieDraw.js)
 ## Follow the following Instructions to use the Web Application:
 - Adjust the parameters to the values you want and then click "Start Animation" button.
 - Various fields as well as sliders are provided to change the lengths of various links and the angle delta.
